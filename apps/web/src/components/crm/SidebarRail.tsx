@@ -15,6 +15,9 @@ import {
   PieChart,
   ChevronLeft,
   ArrowUpCircle,
+  DollarSign,
+  Building2,
+  Menu,
 } from 'lucide-react';
 import { CrmMenuFlyout } from './CrmMenuFlyout';
 
@@ -27,27 +30,32 @@ export function SidebarRail({ activeModule = 'contacts', onSelectModule }: Sideb
   const [isCrmFlyoutOpen, setIsCrmFlyoutOpen] = useState(false);
 
   const items = [
-    { id: 'premium', icon: Compass, label: 'Feature Portal' },
     { id: 'home', icon: Home, label: 'Home Dashboard' },
-    { id: 'bookmarks', icon: Bookmark, label: 'Saved Views' },
-    { id: 'contacts', icon: Users, label: 'Contacts', highlight: true, isCrmTrigger: true },
-    { id: 'marketing', icon: Megaphone, label: 'Marketing' },
+    { id: 'contacts', icon: Users, label: 'Contacts' },
+    { id: 'deals', icon: DollarSign, label: 'Deals Pipeline' },
+    { id: 'companies', icon: Building2, label: 'Companies Directory' },
     { id: 'analytics', icon: BarChart3, label: 'Reports & Analytics' },
-    { id: 'funnel', icon: Filter, label: 'Sales Funnels' },
-    { id: 'commerce', icon: CreditCard, label: 'Commerce & Billing' },
-    { id: 'notifications', icon: Bell, label: 'Activity Center' },
-    { id: 'database', icon: Database, label: 'Data Hub' },
-    { id: 'integrations', icon: GitFork, label: 'App Integrations' },
-    { id: 'workflows', icon: Workflow, label: 'Automation Workflows' },
-    { id: 'reports', icon: PieChart, label: 'Custom Dashboards' },
+    
+    // Non-essential items hidden on mobile screen sizes
+    { id: 'premium', icon: Compass, label: 'Feature Portal', hideOnMobile: true },
+    { id: 'bookmarks', icon: Bookmark, label: 'Saved Views', hideOnMobile: true },
+    { id: 'marketing', icon: Megaphone, label: 'Marketing', hideOnMobile: true },
+    { id: 'funnel', icon: Filter, label: 'Sales Funnels', hideOnMobile: true },
+    { id: 'commerce', icon: CreditCard, label: 'Commerce & Billing', hideOnMobile: true },
+    { id: 'notifications', icon: Bell, label: 'Activity Center', hideOnMobile: true },
+    { id: 'database', icon: Database, label: 'Data Hub', hideOnMobile: true },
+    { id: 'integrations', icon: GitFork, label: 'App Integrations', hideOnMobile: true },
+    { id: 'workflows', icon: Workflow, label: 'Automation Workflows', hideOnMobile: true },
+    { id: 'reports', icon: PieChart, label: 'Custom Dashboards', hideOnMobile: true },
   ];
 
   return (
     <>
       <aside className="oneness-sidebar" aria-label="CRM Navigation Rail">
-        {/* Top Brand Sprocket Logo (Click opens CRM Menu Flyout - Screenshot 1) */}
+        {/* Top Brand Sprocket Logo (Hidden on mobile) */}
         <div
           onClick={() => setIsCrmFlyoutOpen(!isCrmFlyoutOpen)}
+          className="hide-on-mobile"
           style={{
             width: 34,
             height: 34,
@@ -75,15 +83,12 @@ export function SidebarRail({ activeModule = 'contacts', onSelectModule }: Sideb
               key={item.id}
               type="button"
               onClick={() => {
-                if (item.isCrmTrigger) {
-                  setIsCrmFlyoutOpen(!isCrmFlyoutOpen);
-                }
                 if (onSelectModule) {
                   onSelectModule(item.id);
                 }
               }}
-              title={`${item.label} (Click for CRM Menu)`}
-              className={`oneness-sidebar__item ${isActive ? 'oneness-sidebar__item--active' : ''}`}
+              title={`${item.label}`}
+              className={`oneness-sidebar__item ${isActive ? 'oneness-sidebar__item--active' : ''} ${item.hideOnMobile ? 'hide-on-mobile' : ''}`}
               aria-label={item.label}
             >
               <Icon size={18} />
@@ -91,7 +96,18 @@ export function SidebarRail({ activeModule = 'contacts', onSelectModule }: Sideb
           );
         })}
 
-        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+        {/* Mobile menu trigger button shown only on bottom bar */}
+        <button
+          type="button"
+          className="oneness-sidebar__item show-only-on-mobile"
+          onClick={() => setIsCrmFlyoutOpen(!isCrmFlyoutOpen)}
+          title="More modules"
+          style={{ display: 'none' }}
+        >
+          <Menu size={18} />
+        </button>
+
+        <div className="hide-on-mobile" style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
           <button
             type="button"
             className="oneness-sidebar__item"

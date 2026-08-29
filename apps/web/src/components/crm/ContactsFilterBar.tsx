@@ -40,6 +40,7 @@ export function ContactsFilterBar({ filters, onFilterChange, onResetFilters }: C
 
   return (
     <div
+      id="contacts-filter-bar"
       style={{
         padding: '0.65rem 1.5rem',
         display: 'flex',

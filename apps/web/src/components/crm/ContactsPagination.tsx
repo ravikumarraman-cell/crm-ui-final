@@ -27,6 +27,7 @@ export function ContactsPagination({
 
   return (
     <div
+      id="contacts-pagination"
       style={{
         padding: '0.75rem 1.5rem',
         display: 'flex',
@@ -81,6 +82,7 @@ export function ContactsPagination({
             <button
               key={p}
               type="button"
+              className="hide-on-mobile"
               onClick={() => onPageChange(p - 1)}
               style={{
                 width: 26,
@@ -154,7 +156,7 @@ export function ContactsPagination({
         <button
           type="button"
           onClick={onExport}
-          className="oneness-btn-secondary"
+          className="oneness-btn-secondary hide-on-mobile"
           style={{ borderRadius: '9999px', padding: '0.25rem 0.65rem', fontSize: 12 }}
         >
           <Download size={13} style={{ color: '#00a4bd' }} /> Export
@@ -162,7 +164,7 @@ export function ContactsPagination({
         <button
           type="button"
           onClick={onClone}
-          className="oneness-btn-secondary"
+          className="oneness-btn-secondary hide-on-mobile"
           style={{ borderRadius: '9999px', padding: '0.25rem 0.65rem', fontSize: 12 }}
         >
           <Copy size={13} /> Clone

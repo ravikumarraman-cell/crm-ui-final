@@ -30,6 +30,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
             onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
           />
           <div
+            className="hide-on-mobile"
             style={{
               fontSize: 10,
               background: 'rgba(255,255,255,0.2)',
@@ -65,6 +66,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
 
         <button
           type="button"
+          className="hide-on-mobile"
           style={{
             background: '#ff5c35',
             color: '#fff',
@@ -87,6 +89,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
         <button
           type="button"
+          className="hide-on-mobile"
           style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}
           title="Calling Center"
         >
@@ -95,6 +98,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
 
         <button
           type="button"
+          className="hide-on-mobile"
           style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}
           title="App Marketplace"
         >
@@ -103,6 +107,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
 
         <button
           type="button"
+          className="hide-on-mobile"
           style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}
           title="Help & Support"
         >
@@ -111,6 +116,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
 
         <button
           type="button"
+          className="hide-on-mobile"
           style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}
           title="Settings"
         >
@@ -155,7 +161,7 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
             border: '1px solid rgba(0, 164, 189, 0.5)',
             color: '#ffffff',
             borderRadius: 20,
-            padding: '3px 10px',
+            padding: '4px 10px',
             fontSize: 12,
             fontWeight: 600,
             display: 'inline-flex',
@@ -164,15 +170,16 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
             cursor: 'pointer',
           }}
         >
-          <Sparkles size={13} style={{ color: '#00a4bd' }} /> Breeze Assistant
+          <Sparkles size={13} style={{ color: '#00a4bd' }} /> 
+          <span className="hide-on-mobile">Breeze Assistant</span>
         </button>
 
         {/* User Profile Pill */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', paddingLeft: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', paddingLeft: '0.25rem' }}>
           <div
             style={{
-              width: 24,
-              height: 24,
+              width: 26,
+              height: 26,
               borderRadius: '50%',
               background: '#00a4bd',
               color: '#fff',
@@ -181,12 +188,13 @@ export function TopNavbar({ onSearchChange, onOpenQuickAdd, onOpenBreezeAI }: To
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              boxShadow: '0 0 0 2px rgba(255,255,255,0.1)',
             }}
           >
             NU
           </div>
-          <span style={{ fontSize: 13, fontWeight: 500, color: '#f8fafc' }}>Nithyananda University</span>
-          <ChevronDown size={14} style={{ color: '#94a3b8' }} />
+          <span className="hide-on-mobile" style={{ fontSize: 13, fontWeight: 500, color: '#f8fafc' }}>Nithyananda University</span>
+          <ChevronDown className="hide-on-mobile" size={14} style={{ color: '#94a3b8' }} />
         </div>
       </div>
     </header>

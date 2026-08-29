@@ -329,3 +329,96 @@
   background-color: var(--oneness-border-light);
   margin: 0.35rem 0;
 }
+
+/* ==========================================================================
+   Comprehensive Responsive Overrides (Laptops, Desktops, Tablets, & Mobile)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Global Layout Adjustments */
+  .oneness-app {
+    padding-bottom: 56px; /* Avoid overlapping with bottom bar */
+  }
+  
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .show-only-on-mobile {
+    display: flex !important;
+  }
+  
+  /* Top Navbar optimization */
+  .oneness-topbar {
+    padding: 0 0.5rem !important;
+  }
+  
+  .oneness-topbar__search {
+    width: 120px !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  .oneness-topbar__search input {
+    font-size: 11px;
+  }
+  
+  /* Transforming sidebar to sleek native-looking bottom bar */
+  .oneness-sidebar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 56px !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    padding: 0 0.25rem !important;
+    gap: 0 !important;
+    border-right: none !important;
+    border-top: 1px solid var(--oneness-slate-800) !important;
+    z-index: 100 !important;
+    box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.15);
+  }
+  
+  .oneness-sidebar__item {
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    border-left: none !important;
+    border-top: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--oneness-slate-400);
+    border-radius: var(--oneness-radius-md) !important;
+  }
+  
+  .oneness-sidebar__item--active {
+    background-color: rgba(0, 164, 189, 0.12) !important;
+    color: var(--oneness-teal-500) !important;
+    border-radius: var(--oneness-radius-md) !important;
+  }
+  
+  /* Tables & Lists scroll wrapper */
+  .oneness-table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Page title padding */
+  .crm-view-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* Large display containers maximum width logic for perfect alignment */
+.oneness-container-fluid {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+

@@ -1,18 +1,25 @@
-import { ChevronDown, Plus, Info, LayoutGrid } from 'lucide-react';
+import { ChevronDown, Plus, Info, LayoutGrid, List } from 'lucide-react';
 
 interface ContactsHeaderToolbarProps {
   onAddContactClick: () => void;
   selectedTab?: string;
   onSelectTab?: (tab: string) => void;
+  viewMode?: 'list' | 'grid';
+  onViewModeChange?: (mode: 'list' | 'grid') => void;
 }
 
 export function ContactsHeaderToolbar({
   onAddContactClick,
   selectedTab = 'All contacts',
   onSelectTab,
+  viewMode = 'list',
+  onViewModeChange,
 }: ContactsHeaderToolbarProps) {
   return (
-    <div style={{ padding: '1rem 1.5rem 0.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+    <div
+      id="contacts-header-toolbar"
+      style={{ padding: '1rem 1.5rem 0.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}
+    >
       {/* Top Header Row */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -37,14 +44,55 @@ export function ContactsHeaderToolbar({
           >
             <Info size={16} />
           </button>
-          <button
-            type="button"
-            className="oneness-btn-secondary"
-            style={{ padding: '0.4rem 0.6rem', color: '#00a4bd', borderColor: '#ff7a59' }}
-            title="View Mode"
-          >
-            <LayoutGrid size={16} />
-          </button>
+
+          {/* Premium View Mode Toggler Button Group */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px', border: '1px solid #cbd5e1', borderRadius: '6px', padding: '2px', background: '#f8fafc' }}>
+            <button
+              type="button"
+              onClick={() => onViewModeChange && onViewModeChange('list')}
+              style={{
+                padding: '0.3rem 0.6rem',
+                background: viewMode === 'list' ? '#ffffff' : 'none',
+                border: 'none',
+                borderRadius: '4px',
+                color: viewMode === 'list' ? '#00a4bd' : '#64748b',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '11px',
+                fontWeight: 600,
+                boxShadow: viewMode === 'list' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+              }}
+              title="List View"
+            >
+              <List size={14} />
+              <span className="hide-on-mobile">List</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onViewModeChange && onViewModeChange('grid')}
+              style={{
+                padding: '0.3rem 0.6rem',
+                background: viewMode === 'grid' ? '#ffffff' : 'none',
+                border: 'none',
+                borderRadius: '4px',
+                color: viewMode === 'grid' ? '#00a4bd' : '#64748b',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '11px',
+                fontWeight: 600,
+                boxShadow: viewMode === 'grid' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+              }}
+              title="Card Grid View"
+            >
+              <LayoutGrid size={14} />
+              <span className="hide-on-mobile">Cards</span>
+            </button>
+          </div>
+
           <button
             type="button"
             className="oneness-btn-primary"

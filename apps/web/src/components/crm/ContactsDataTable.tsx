@@ -102,62 +102,62 @@ export function ContactsDataTable({
               >
                 {initial}
               </div>
-              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectContact(contact);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#00a4bd',
-                      fontWeight: 600,
-                      fontSize: '13px',
-                      cursor: 'pointer',
-                      padding: 0,
-                      textAlign: 'left',
-                    }}
-                  >
-                    {contact.name}
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectContact(contact);
+                      }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#00a4bd',
+                        fontWeight: 600,
+                        fontSize: '13px',
+                        cursor: 'pointer',
+                        padding: 0,
+                        textAlign: 'left',
+                      }}
+                    >
+                      {contact.name}
+                    </button>
+
+                    {/* Screenshot 2 Exact Hover Tooltip/Badge for "Preview" rendered inline to prevent cut-offs */}
+                    {isHovered && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onPreviewContact(contact);
+                        }}
+                        style={{
+                          background: '#1e293b',
+                          color: '#ffffff',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          padding: '1px 6px',
+                          borderRadius: '4px',
+                          border: '1px solid #334155',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 3,
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          marginLeft: '4px',
+                        }}
+                        title="Quick Preview"
+                      >
+                        <Eye size={10} /> Preview
+                      </button>
+                    )}
+                  </div>
                   {contact.company && (
                     <div style={{ fontSize: '11px', color: '#64748b' }}>{contact.company}</div>
                   )}
                 </div>
-
-                {/* Screenshot 2 Exact Hover Tooltip/Badge for "Preview" */}
-                {isHovered && (
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onPreviewContact(contact);
-                    }}
-                    style={{
-                      position: 'absolute',
-                      top: '-24px',
-                      left: '0px',
-                      background: '#334155',
-                      color: '#ffffff',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      zIndex: 10,
-                      boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                    }}
-                  >
-                    <Eye size={12} /> Preview
-                  </button>
-                )}
               </div>
             </div>
           );
@@ -317,7 +317,7 @@ export function ContactsDataTable({
   const selectedContactIds = Object.keys(rowSelection);
 
   return (
-    <div style={{ padding: '0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <div id="contacts-data-table-wrapper" style={{ padding: '0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       {/* Bulk Action Toolbar when rows are selected */}
       {selectedCount > 0 && (
         <div
