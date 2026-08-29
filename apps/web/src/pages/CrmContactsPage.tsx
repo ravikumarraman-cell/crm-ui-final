@@ -11,6 +11,13 @@ import { ContactPreviewDrawer } from '../components/crm/ContactPreviewDrawer';
 import { ContactFormModal } from '../components/crm/ContactFormModal';
 import { BreezeAiModal } from '../components/crm/BreezeAiModal';
 import { Contact, ContactsFilterState, ContactsPaginationState } from '../core/crm/types';
+
+// Dynamic Workspace Views
+import { HomeDashboardView } from '../components/crm/views/HomeDashboardView';
+import { AnalyticsView } from '../components/crm/views/AnalyticsView';
+import { DealsView } from '../components/crm/views/DealsView';
+import { CompaniesView } from '../components/crm/views/CompaniesView';
+
 import {
   useContactsQuery,
   useContactDetailQuery,
@@ -131,54 +138,73 @@ export function CrmContactsPage() {
               onSummarizeContact={handleSummarizeContact}
             />
           ) : (
-            /* Screenshot 2 & List View: Contacts List View */
-            <>
-              {/* Header & Tabs */}
-              <ContactsHeaderToolbar
-                onAddContactClick={() => setIsAddModalOpen(true)}
-              />
+            (() => {
+              const mod = activeModule.toLowerCase();
+              if (mod === 'home') {
+                return <HomeDashboardView contacts={contactsList} onSelectModule={setActiveModule} />;
+              }
+              if (mod === 'analytics') {
+                return <AnalyticsView contacts={contactsList} />;
+              }
+              if (mod === 'deals') {
+                return <DealsView />;
+              }
+              if (mod === 'companies') {
+                return <CompaniesView />;
+              }
+              
+              // Fallback to traditional contacts list
+              return (
+                /* Screenshot 2 & List View: Contacts List View */
+                <>
+                  {/* Header & Tabs */}
+                  <ContactsHeaderToolbar
+                    onAddContactClick={() => setIsAddModalOpen(true)}
+                  />
 
-              {/* Filter Bar */}
-              <ContactsFilterBar
-                filters={filters}
-                onFilterChange={setFilters}
-                onResetFilters={() =>
-                  setFilters({
-                    search: '',
-                    contactOwner: 'All',
-                    createDateRange: '',
-                    lastActivityRange: '',
-                    leadStatus: 'All',
-                    advancedFilters: false,
-                    sortBy: 'name',
-                    sortOrder: 'asc',
-                  })
-                }
-              />
+                  {/* Filter Bar */}
+                  <ContactsFilterBar
+                    filters={filters}
+                    onFilterChange={setFilters}
+                    onResetFilters={() =>
+                      setFilters({
+                        search: '',
+                        contactOwner: 'All',
+                        createDateRange: '',
+                        lastActivityRange: '',
+                        leadStatus: 'All',
+                        advancedFilters: false,
+                        sortBy: 'name',
+                        sortOrder: 'asc',
+                      })
+                    }
+                  />
 
-              {/* TanStack Contacts Data Table */}
-              <div style={{ flex: 1, overflowY: 'auto' }}>
-                <ContactsDataTable
-                  contacts={contactsList}
-                  onSelectContact={(c) => setSelectedContactId(c.id)}
-                  onPreviewContact={(c) => setPreviewContact(c)}
-                  onDeleteContact={handleDeleteContact}
-                  onBulkDelete={handleBulkDelete}
-                  onSummarizeContact={handleSummarizeContact}
-                  isLoading={isLoading}
-                />
-              </div>
+                  {/* TanStack Contacts Data Table */}
+                  <div style={{ flex: 1, overflowY: 'auto' }}>
+                    <ContactsDataTable
+                      contacts={contactsList}
+                      onSelectContact={(c) => setSelectedContactId(c.id)}
+                      onPreviewContact={(c) => setPreviewContact(c)}
+                      onDeleteContact={handleDeleteContact}
+                      onBulkDelete={handleBulkDelete}
+                      onSummarizeContact={handleSummarizeContact}
+                      isLoading={isLoading}
+                    />
+                  </div>
 
-              {/* Bottom Pagination Bar */}
-              <ContactsPagination
-                pagination={{ ...pagination, totalCount: currentTotalCount }}
-                onPageChange={(pageIndex) => setPagination((prev) => ({ ...prev, pageIndex }))}
-                onPageSizeChange={(pageSize) => setPagination((prev) => ({ ...prev, pageSize, pageIndex: 0 }))}
-                onRefresh={() => refetch()}
-                onExport={() => alert('Exporting contacts dataset to CSV...')}
-                onClone={() => alert('Cloned contact views configuration.')}
-              />
-            </>
+                  {/* Bottom Pagination Bar */}
+                  <ContactsPagination
+                    pagination={{ ...pagination, totalCount: currentTotalCount }}
+                    onPageChange={(pageIndex) => setPagination((prev) => ({ ...prev, pageIndex }))}
+                    onPageSizeChange={(pageSize) => setPagination((prev) => ({ ...prev, pageSize, pageIndex: 0 }))}
+                    onRefresh={() => refetch()}
+                    onExport={() => alert('Exporting contacts dataset to CSV...')}
+                    onClone={() => alert('Cloned contact views configuration.')}
+                  />
+                </>
+              );
+            })()
           )}
         </div>
       </div>
