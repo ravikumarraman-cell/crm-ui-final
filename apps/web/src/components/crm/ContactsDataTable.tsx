@@ -95,14 +95,14 @@ export function ContactsDataTable({
           const isHovered = hoveredRowId === contact.id;
 
           return (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', position: 'relative', width: '100%', paddingRight: '68px' }}>
               <div
                 className="oneness-avatar"
                 style={{ backgroundColor: contact.avatarBg || '#00a4bd', color: '#ffffff' }}
               >
                 {initial}
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <button
@@ -124,41 +124,45 @@ export function ContactsDataTable({
                     >
                       {contact.name}
                     </button>
-
-                    {/* Screenshot 2 Exact Hover Tooltip/Badge for "Preview" rendered inline to prevent cut-offs */}
-                    {isHovered && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onPreviewContact(contact);
-                        }}
-                        style={{
-                          background: '#1e293b',
-                          color: '#ffffff',
-                          fontSize: '10px',
-                          fontWeight: 600,
-                          padding: '1px 6px',
-                          borderRadius: '4px',
-                          border: '1px solid #334155',
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 3,
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                          marginLeft: '4px',
-                        }}
-                        title="Quick Preview"
-                      >
-                        <Eye size={10} /> Preview
-                      </button>
-                    )}
                   </div>
                   {contact.company && (
                     <div style={{ fontSize: '11px', color: '#64748b' }}>{contact.company}</div>
                   )}
                 </div>
               </div>
+
+              {/* Absolute-positioned Preview button prevents layout shifting and row wrapping on hover */}
+              {isHovered && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onPreviewContact(contact);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    right: '4px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: '#1e293b',
+                    color: '#ffffff',
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    border: '1px solid #334155',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 3,
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+                    zIndex: 10,
+                  }}
+                  title="Quick Preview"
+                >
+                  <Eye size={10} /> Preview
+                </button>
+              )}
             </div>
           );
         },
