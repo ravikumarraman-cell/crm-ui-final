@@ -1,0 +1,6 @@
+{
+  "name": "Oneness CRM Contacts",
+  "description": "Full-stack modular CRM Contacts platform built with TanStack Table, TanStack Query, Express server, Gemini AI summarizer, and oneness-ui design system theme.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

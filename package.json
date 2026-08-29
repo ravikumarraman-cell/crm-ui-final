@@ -1,0 +1,42 @@
+{
+  "name": "crm-ui",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Oneness CRM Contacts management application built with React, Express, TanStack Table & Query, and Gemini AI.",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "npm run build -w apps/web",
+    "start": "node server.ts",
+    "test": "npm run test -w apps/web",
+    "lint": "npm run lint -w apps/web"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "lucide-react": "^0.546.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.2.3",
+    "express": "^4.21.2",
+    "dotenv": "^17.2.3",
+    "motion": "^12.23.24"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "@types/express": "^4.17.21",
+    "supabase": "^2.110.0"
+  }
+}

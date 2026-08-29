@@ -1,0 +1,6 @@
+tree ffc215c881a1ddff064bf053eed9e2ea54bb9306
+parent b1975dbcd0336983c0e33176ad1f5e9b08f4ab02
+author aartisr <aartisr@github.com> 1786913911 -0400
+committer aartisr <aartisr@github.com> 1786913911 -0400
+
+fix: explain task sharing ownership requirements
