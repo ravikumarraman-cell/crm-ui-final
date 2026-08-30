@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Contact, LifecycleStage } from '../../core/crm/types';
+import { toast } from '../../lib/toast';
 
 interface ContactPreviewDrawerProps {
   contact: Contact | null;
@@ -322,9 +323,9 @@ export function ContactPreviewDrawer({
               {[
                 { id: 'note', label: 'Note', icon: Edit3, action: () => setIsAddingNote(!isAddingNote) },
                 { id: 'email', label: 'Email', icon: Mail, action: () => window.open(`mailto:${contact.email}`) },
-                { id: 'call', label: 'Call', icon: Phone, action: () => alert(`Calling ${contact.name}...`) },
-                { id: 'task', label: 'Task', icon: CheckSquare, action: () => alert('Created task for contact.') },
-                { id: 'meeting', label: 'Meeting', icon: Calendar, action: () => alert('Scheduled meeting.') },
+                { id: 'call', label: 'Call', icon: Phone, action: () => toast.info(`Calling ${contact.name}...`) },
+                { id: 'task', label: 'Task', icon: CheckSquare, action: () => toast.success('Created task for contact.') },
+                { id: 'meeting', label: 'Meeting', icon: Calendar, action: () => toast.success('Scheduled meeting.') },
                 { id: 'more', label: 'More', icon: MoreHorizontal, action: () => setShowActionsDropdown(true) },
               ].map((act) => {
                 const Icon = act.icon;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { Contact, LifecycleStage, LeadStatus, ContactPriority } from '../../core/crm/types';
+import { toast } from '../../lib/toast';
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -25,7 +26,7 @@ export function ContactFormModal({ isOpen, onClose, onSubmit, initialData }: Con
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
-      alert('Please fill in Name and Email fields.');
+      toast.error('Please fill in Name and Email fields.');
       return;
     }
     onSubmit({

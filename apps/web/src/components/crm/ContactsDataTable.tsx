@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import { ChevronRight, ChevronDown, Mail, Trash2, Sparkles, Eye } from 'lucide-react';
 import { Contact } from '../../core/crm/types';
+import { toast } from '../../lib/toast';
 
 interface ContactsDataTableProps {
   contacts: Contact[];
@@ -345,7 +346,7 @@ export function ContactsDataTable({
               type="button"
               className="oneness-btn-secondary"
               style={{ fontSize: '12px', padding: '0.2rem 0.6rem' }}
-              onClick={() => alert(`Assigned owner to ${selectedCount} contacts.`)}
+              onClick={() => toast.success(`Assigned owner to ${selectedCount} contacts.`)}
             >
               Assign owner
             </button>

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { BarChart3, TrendingUp, Users, Percent, DollarSign, Calendar, Download, ArrowUpRight } from 'lucide-react';
 import { Contact } from '../../../core/crm/types';
+import { toast } from '../../../lib/toast';
 
 interface AnalyticsViewProps {
   contacts: Contact[];
@@ -162,7 +163,7 @@ export function AnalyticsView({ contacts, onBack }: AnalyticsViewProps) {
           <button
             type="button"
             className="oneness-btn-secondary"
-            onClick={() => alert('Exporting visual charts & raw metrics to PDF report...')}
+            onClick={() => toast.success('Exporting visual charts & raw metrics to PDF report...')}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, padding: '6px 12px' }}
           >
             <Download size={14} /> Export Report

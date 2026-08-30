@@ -11,6 +11,8 @@ import { ContactDetailPane } from '../components/crm/ContactDetailPane';
 import { ContactPreviewDrawer } from '../components/crm/ContactPreviewDrawer';
 import { ContactFormModal } from '../components/crm/ContactFormModal';
 import { BreezeAiModal } from '../components/crm/BreezeAiModal';
+import { ToastContainer } from '../components/crm/ToastContainer';
+import { toast } from '../lib/toast';
 import { Contact, ContactsFilterState, ContactsPaginationState } from '../core/crm/types';
 
 // Dynamic Workspace Views
@@ -76,6 +78,7 @@ export function CrmContactsPage() {
   const handleCreateContact = async (data: Omit<Contact, 'id' | 'createDate'>) => {
     await createContactApi(data);
     refetch();
+    toast.success(`Contact "${data.name}" created successfully`);
   };
 
   const handleUpdateContact = async (updates: Partial<Contact>) => {
@@ -87,6 +90,7 @@ export function CrmContactsPage() {
     if (previewContact) {
       setPreviewContact((prev) => (prev ? { ...prev, ...updates } : null));
     }
+    toast.success('Contact details updated successfully');
   };
 
   const handleDeleteContact = async (id: string) => {
@@ -98,6 +102,7 @@ export function CrmContactsPage() {
       setPreviewContact(null);
     }
     refetch();
+    toast.success('Contact deleted successfully');
   };
 
   const handleBulkDelete = async (ids: string[]) => {
@@ -105,6 +110,7 @@ export function CrmContactsPage() {
       await deleteContactApi(id);
     }
     refetch();
+    toast.success(`Successfully deleted ${ids.length} contacts`);
   };
 
   const handleSummarizeContact = async (contact: Contact) => {
@@ -434,9 +440,12 @@ export function CrmContactsPage() {
                     pagination={{ ...pagination, totalCount: currentTotalCount }}
                     onPageChange={(pageIndex) => setPagination((prev) => ({ ...prev, pageIndex }))}
                     onPageSizeChange={(pageSize) => setPagination((prev) => ({ ...prev, pageSize, pageIndex: 0 }))}
-                    onRefresh={() => refetch()}
-                    onExport={() => alert('Exporting contacts dataset to CSV...')}
-                    onClone={() => alert('Cloned contact views configuration.')}
+                    onRefresh={() => {
+                      refetch();
+                      toast.success('Contacts dataset refreshed successfully');
+                    }}
+                    onExport={() => toast.success('Exporting contacts dataset to CSV...')}
+                    onClone={() => toast.success('Cloned contact views configuration.')}
                   />
                 </>
               );
@@ -468,6 +477,9 @@ export function CrmContactsPage() {
         initialSummary={aiSummaryText}
         selectedContactName={detailContact?.name || previewContact?.name}
       />
+
+      {/* Global High-Usability Animated Toast Notifications */}
+      <ToastContainer />
     </div>
   );
 }

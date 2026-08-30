@@ -23,6 +23,7 @@ import {
   Building,
 } from 'lucide-react';
 import { Contact, LifecycleStage, LeadStatus } from '../../core/crm/types';
+import { toast } from '../../lib/toast';
 
 interface ContactDetailPaneProps {
   contact: Contact;
@@ -265,9 +266,9 @@ export function ContactDetailPane({
               {[
                 { id: 'note', label: 'Note', icon: Edit3, act: () => setIsAddingNote(!isAddingNote) },
                 { id: 'email', label: 'Email', icon: Mail, act: () => window.open(`mailto:${contact.email}`) },
-                { id: 'call', label: 'Call', icon: Phone, act: () => alert(`Calling ${contact.name}...`) },
-                { id: 'task', label: 'Task', icon: CheckSquare, act: () => alert('Created task for contact.') },
-                { id: 'meeting', label: 'Meeting', icon: Calendar, act: () => alert('Scheduled meeting.') },
+                { id: 'call', label: 'Call', icon: Phone, act: () => toast.info(`Calling ${contact.name}...`) },
+                { id: 'task', label: 'Task', icon: CheckSquare, act: () => toast.success('Created task for contact.') },
+                { id: 'meeting', label: 'Meeting', icon: Calendar, act: () => toast.success('Scheduled meeting.') },
                 { id: 'more', label: 'More', icon: MoreHorizontal, act: () => setShowActionsDropdown(true) },
               ].map((btn) => {
                 const Icon = btn.icon;
@@ -460,7 +461,7 @@ export function ContactDetailPane({
 
             <button
               type="button"
-              onClick={() => alert('Customizing tab layout & widget widgets...')}
+              onClick={() => toast.info('Customizing tab layout & widgets...')}
               style={{
                 background: 'none',
                 border: 'none',
@@ -773,7 +774,7 @@ export function ContactDetailPane({
                 <button
                   type="button"
                   className="oneness-btn-teal"
-                  onClick={() => alert('Opening Breeze Data Agent upgrade window...')}
+                  onClick={() => toast.info('Opening Breeze Data Agent upgrade window...')}
                   style={{ marginTop: '0.5rem', fontSize: '13px', padding: '0.5rem 1.25rem' }}
                 >
                   Upgrade Data Agent

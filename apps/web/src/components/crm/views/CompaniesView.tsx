@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Building2, Plus, Search, ExternalLink } from 'lucide-react';
+import { toast } from '../../../lib/toast';
 
 interface Company {
   id: string;
@@ -292,7 +293,7 @@ export function CompaniesView() {
                 </a>
                 <button
                   type="button"
-                  onClick={() => alert(`Showing corporate structures & connected contacts for ${c.name}`)}
+                  onClick={() => toast.info(`Showing corporate structures & connected contacts for ${c.name}`)}
                   style={{ border: '1px solid #cbd5e1', background: '#ffffff', borderRadius: '4px', padding: '4px 8px', fontSize: '11px', cursor: 'pointer', color: '#00a4bd', fontWeight: 600 }}
                 >
                   View Contacts
